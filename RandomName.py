@@ -15,6 +15,7 @@ class RandomPerson():
     self.firstname_value = self.get_firstname(gender=gender, origin=origin, capitalize=capitalize)
     self.lastname_value = self.get_lastname(origin=origin, capitalize=capitalize)
 
+
   def get_firstname(self, gender=None, origin=None, capitalize=False):
     df_fnames = self.first_names
 
@@ -38,7 +39,6 @@ class RandomPerson():
     else:
       raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
     
-
     fname = df_fnames['name'].sample().to_string(index=False)
     fname = fname.strip()
 
@@ -49,12 +49,14 @@ class RandomPerson():
       return fname
     else:
       raise Exception('Invalid value. Value: ' +str(capitalize)+' not valid for parameter capitalize')
+  
+  
   def firstname(self):
     return self.firstname_value
 
+
   def get_lastname(self,origin=None, capitalize=False):
     df_lnames = self.last_names
-
 
     if origin == "german" or origin == "american" or origin is None:
       if origin is None:
@@ -66,7 +68,6 @@ class RandomPerson():
     else:
       raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
     
-
     lname = df_lnames['name'].sample().to_string(index=False)
     lname = lname.strip()
 
@@ -77,11 +78,15 @@ class RandomPerson():
       return lname
     else:
       raise Exception('Invalid value. Value: ' +str(capitalize)+' not valid for parameter capitalize')
+  
+  
   def lastname(self):
     return self.lastname_value
 
+
   def fullname(self):
     return self.firstname_value + " " + self.lastname_value
+
 
   def mail(self):
     fname = self.firstname_value
