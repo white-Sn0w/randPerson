@@ -6,7 +6,7 @@ import random
 class RandomPerson():
 
   def __init__(self,gender=None, origin=None, capitalize=False):
-    df = pd.read_csv('./names.csv', delimiter=';')
+    df = pd.read_csv('randPerson/names.csv', delimiter=';')
     self.first_names = df.loc[(df['type'] == 'firstname')]
     self.last_names = df.loc[(df['type'] == 'lastname')]
     self.mail_prefix = df.loc[(df['type'] == 'mail_prefix')]
