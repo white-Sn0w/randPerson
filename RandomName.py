@@ -145,4 +145,4 @@ class RandomPerson():
       email = fname + lname + mail_prefix 
   
   
-    return email 
+    return email.lower()
