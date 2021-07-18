@@ -98,7 +98,7 @@ class RandomPerson():
     mail_prefix = self.mail_prefix['name'].sample().to_string(index=False)
     mail_prefix = mail_prefix.strip()
     
-    ran = random.randint(1,4)
+    ran = random.randint(1,6)
     
     #p_lustig@yahoo.de
     if ran == 1:
