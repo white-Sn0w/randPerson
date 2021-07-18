@@ -142,6 +142,7 @@ class RandomPerson():
     if ran == 6: 
       fname = [char for char in fname]
       fname = fname[0:2]
+      fname = "".join(fname)
       email = fname + lname + mail_prefix 
   
   
