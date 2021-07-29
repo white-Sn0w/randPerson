@@ -5,7 +5,7 @@ import random
 class RandomPerson():
 
   def __init__(self,gender=None, origin=None, capitalize=False):
-    df = pd.read_csv('names.csv', delimiter=';')
+    df = pd.read_csv('randPerson/names.csv', delimiter=';')
 
 
 #Importing Dataframes for specifc Operations
