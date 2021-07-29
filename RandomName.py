@@ -154,7 +154,7 @@ class RandomPerson():
 
 
 
-  def phonenumber(self, origin, prefix):
+  def phonenumber(self, origin):
     df_international_prefix = self.international_prefix
     df_national_prefix = self.national_prefix
 
@@ -177,13 +177,4 @@ class RandomPerson():
 
 
     return int_phoneNumber_prefix, nat_phoneNumber_prefix
-
-  
-
-
-  a = RandomPerson(capitalize=True)
-  a.firstname()
-  a.lastname()
-  a.mail()
-  a.phonenumber()
 
