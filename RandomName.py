@@ -1,20 +1,28 @@
 import pandas as pd
 import random
 
-
 #initilize class
 class RandomPerson():
 
   def __init__(self,gender=None, origin=None, capitalize=False):
-    df = pd.read_csv('randPerson/names.csv', delimiter=';')
+    df = pd.read_csv('names.csv', delimiter=';')
+
+
+#Importing Dataframes for specifc Operations
+
+  #Names
     self.first_names = df.loc[(df['type'] == 'firstname')]
     self.last_names = df.loc[(df['type'] == 'lastname')]
+
+  #Mail
     self.mail_prefix = df.loc[(df['type'] == 'mail_prefix')]
     self.mail_connector = df.loc[(df['type'] == 'mail_connector')]
+
+  #Phonenumber
     self.international_prefix = df.loc[(df['type'] == 'international_prefix')]
     self.national_prefix = df.loc[(df['type'] == 'national_prefix')]
 
-  
+  #Generating Fixed Values
     self.firstname_value = self.get_firstname(gender=gender, origin=origin, capitalize=capitalize)
     self.lastname_value = self.get_lastname(origin=origin, capitalize=capitalize)
     self.phonenumber_value = self.get_phonenumber(origin=origin)
@@ -158,16 +166,13 @@ class RandomPerson():
     df_international_prefix = self.international_prefix
     df_national_prefix = self.national_prefix
 
-    if origin == "german" or origin == "american" or origin is None: 
-      if origin is None: 
-        pass 
-  
-      else: 
+    if origin is None:
+      origin = "german"
+
+    if origin == "german" or origin == "american": 
+      
         df_international_prefix = df_international_prefix.loc[(df_international_prefix['origin'] == origin)]
         df_national_prefix = df_national_prefix.loc[(df_national_prefix['origin'] == origin)]
-
-    else:
-      raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
 
     int_phoneNumber_prefix = df_international_prefix['name'].sample().to_string(index=False)
     int_phoneNumber_prefix = str(int_phoneNumber_prefix.strip())
@@ -184,7 +189,7 @@ class RandomPerson():
       rand_lenght = random.randint(7,7)
 
     if origin is None:
-      raise Exception('Origin Parameter needs to be provided in order to generate phone number')
+      raise Exception('Parameter origin needs to be provided in order to generate phone number')
 
 
     phone_number = str(generate_phonenumber(rand_lenght))
@@ -205,3 +210,6 @@ def generate_phonenumber(N):
 	min = pow(10, N-1)
 	max = pow(10, N) - 1
 	return random.randint(min, max)
+
+
+
