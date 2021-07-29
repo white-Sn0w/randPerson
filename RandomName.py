@@ -14,6 +14,7 @@ class RandomPerson():
     self.international_prefix = df.loc[(df['type'] == 'international_prefix')]
     self.national_prefix = df.loc[(df['type'] == 'national_prefix')]
 
+  
     self.firstname_value = self.get_firstname(gender=gender, origin=origin, capitalize=capitalize)
     self.lastname_value = self.get_lastname(origin=origin, capitalize=capitalize)
 
@@ -37,7 +38,7 @@ class RandomPerson():
         pass 
 
       else: 
-        df_fnames = df_fnames.loc[(df_fnames['name_origin'] == origin)]
+        df_fnames = df_fnames.loc[(df_fnames['origin'] == origin)]
 
     else:
       raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
@@ -66,7 +67,7 @@ class RandomPerson():
         pass
       
       else:
-        df_lnames = df_lnames.loc[(df_lnames['name_origin'] == origin)]
+        df_lnames = df_lnames.loc[(df_lnames['origin'] == origin)]
 
     else:
       raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
@@ -157,7 +158,7 @@ class RandomPerson():
     df_international_prefix = self.international_prefix
     df_national_prefix = self.national_prefix
 
-    if origin == "german" or origin is None: 
+    if origin == "german" or origin == "american" or origin is None: 
       if origin is None: 
         pass 
   
@@ -174,16 +175,26 @@ class RandomPerson():
     nat_phoneNumber_prefix = df_national_prefix['name'].sample().to_string(index=False)
     nat_phoneNumber_prefix = str(nat_phoneNumber_prefix.strip())
 
-    
-    rand_lenght = random.randint(8,9)
+
+
+    if origin == "german":
+      rand_lenght = random.randint(8,9)
+  
+    if origin == "american":
+      rand_lenght = random.randint(7,7)
+
+    if origin is None:
+      raise Exception('Origin Parameter needs to be provided in order to generate phone number')
+
 
     phone_number = str(generate_phonenumber(rand_lenght))
 
     phone_number = int_phoneNumber_prefix + nat_phoneNumber_prefix + phone_number
-
-
     return phone_number
+    
+    
 
+    
 
 
 #Supporting Functions
@@ -191,3 +202,6 @@ def generate_phonenumber(N):
 	min = pow(10, N-1)
 	max = pow(10, N) - 1
 	return random.randint(min, max)
+
+a = RandomPerson(gender="male")
+print(a.phonenumber(origin="american"))
