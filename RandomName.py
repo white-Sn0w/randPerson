@@ -11,9 +11,12 @@ class RandomPerson():
     self.last_names = df.loc[(df['type'] == 'lastname')]
     self.mail_prefix = df.loc[(df['type'] == 'mail_prefix')]
     self.mail_connector = df.loc[(df['type'] == 'mail_connector')]
+    self.international_prefix = df.loc[(df['type'] == 'international_prefix')]
+    self.national_prefix = df.loc[(df['type'] == 'national_prefix')]
 
     self.firstname_value = self.get_firstname(gender=gender, origin=origin, capitalize=capitalize)
     self.lastname_value = self.get_lastname(origin=origin, capitalize=capitalize)
+
 
 
   def get_firstname(self, gender=None, origin=None, capitalize=False):
@@ -51,6 +54,7 @@ class RandomPerson():
       raise Exception('Invalid value. Value: ' +str(capitalize)+' not valid for parameter capitalize')
   
   
+
   def firstname(self):
     return self.firstname_value
 
@@ -147,3 +151,39 @@ class RandomPerson():
   
   
     return email.lower()
+
+
+
+  def phonenumber(self, origin, prefix):
+    df_international_prefix = self.international_prefix
+    df_national_prefix = self.national_prefix
+
+    if origin == "german" or origin is None: 
+      if origin is None: 
+        pass 
+  
+      else: 
+        df_international_prefix = df_international_prefix.loc[(df_international_prefix['origin'] == origin)]
+        df_national_prefix = df_national_prefix.loc[(df_national_prefix['origin'] == origin)]
+
+    else:
+      raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
+
+    int_phoneNumber_prefix = df_international_prefix['name'].sample().to_string(index=False)
+    int_phoneNumber_prefix = int_phoneNumber_prefix.strip()
+  
+    nat_phoneNumber_prefix = df_national_prefix['name'].sample().to_string(index=False)
+    nat_phoneNumber_prefix = nat_phoneNumber_prefix.strip()
+
+
+    return int_phoneNumber_prefix, nat_phoneNumber_prefix
+
+  
+
+
+  a = RandomPerson(capitalize=True)
+  a.firstname()
+  a.lastname()
+  a.mail()
+  a.phonenumber()
+
