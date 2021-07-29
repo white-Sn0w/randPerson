@@ -17,7 +17,7 @@ class RandomPerson():
   
     self.firstname_value = self.get_firstname(gender=gender, origin=origin, capitalize=capitalize)
     self.lastname_value = self.get_lastname(origin=origin, capitalize=capitalize)
-
+    self.phonenumber_value = self.get_phonenumber(origin=origin)
 
 
   def get_firstname(self, gender=None, origin=None, capitalize=False):
@@ -154,7 +154,7 @@ class RandomPerson():
 
 
 
-  def phonenumber(self, origin=None):
+  def get_phonenumber(self, origin=None):
     df_international_prefix = self.international_prefix
     df_national_prefix = self.national_prefix
 
@@ -190,9 +190,12 @@ class RandomPerson():
     phone_number = str(generate_phonenumber(rand_lenght))
 
     phone_number = int_phoneNumber_prefix + nat_phoneNumber_prefix + phone_number
+    
     return phone_number
     
-    
+
+  def phonenumber(self):
+    return self.phonenumber_value
 
     
 
@@ -202,6 +205,3 @@ def generate_phonenumber(N):
 	min = pow(10, N-1)
 	max = pow(10, N) - 1
 	return random.randint(min, max)
-
-a = RandomPerson(gender="male")
-print(a.phonenumber(origin="american"))
