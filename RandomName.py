@@ -6,7 +6,7 @@ import random
 class RandomPerson():
 
   def __init__(self,gender=None, origin=None, capitalize=False):
-    df = pd.read_csv('randPerson/names.csv', delimiter=';')
+    df = pd.read_csv('names.csv', delimiter=';')
     self.first_names = df.loc[(df['type'] == 'firstname')]
     self.last_names = df.loc[(df['type'] == 'lastname')]
     self.mail_prefix = df.loc[(df['type'] == 'mail_prefix')]
@@ -154,7 +154,7 @@ class RandomPerson():
 
 
 
-  def phonenumber(self, origin):
+  def phonenumber(self, origin=None):
     df_international_prefix = self.international_prefix
     df_national_prefix = self.national_prefix
 
@@ -170,11 +170,27 @@ class RandomPerson():
       raise Exception('Invalid value. Value: ' +str(origin)+' not valid for parameter origin')
 
     int_phoneNumber_prefix = df_international_prefix['name'].sample().to_string(index=False)
-    int_phoneNumber_prefix = int_phoneNumber_prefix.strip()
+    int_phoneNumber_prefix = str(int_phoneNumber_prefix.strip())
   
     nat_phoneNumber_prefix = df_national_prefix['name'].sample().to_string(index=False)
-    nat_phoneNumber_prefix = nat_phoneNumber_prefix.strip()
+    nat_phoneNumber_prefix = str(nat_phoneNumber_prefix.strip())
+
+    
+    rand_lenght = random.randint(8,9)
+
+    phone_number = str(generate_phonenumber(rand_lenght))
+
+    phone_number = int_phoneNumber_prefix + nat_phoneNumber_prefix + phone_number
 
 
-    return int_phoneNumber_prefix, nat_phoneNumber_prefix
+    return phone_number
+
+
+
+#Supporting Functions
+
+def generate_phonenumber(N):
+	min = pow(10, N-1)
+	max = pow(10, N) - 1
+	return random.randint(min, max)
 
