@@ -6,7 +6,7 @@ import random
 class RandomPerson():
 
   def __init__(self,gender=None, origin=None, capitalize=False):
-    df = pd.read_csv('names.csv', delimiter=';')
+    df = pd.read_csv('randPerson/names.csv', delimiter=';')
     self.first_names = df.loc[(df['type'] == 'firstname')]
     self.last_names = df.loc[(df['type'] == 'lastname')]
     self.mail_prefix = df.loc[(df['type'] == 'mail_prefix')]
@@ -54,7 +54,6 @@ class RandomPerson():
       raise Exception('Invalid value. Value: ' +str(capitalize)+' not valid for parameter capitalize')
   
   
-
   def firstname(self):
     return self.firstname_value
 
@@ -188,9 +187,7 @@ class RandomPerson():
 
 
 #Supporting Functions
-
 def generate_phonenumber(N):
 	min = pow(10, N-1)
 	max = pow(10, N) - 1
 	return random.randint(min, max)
-
