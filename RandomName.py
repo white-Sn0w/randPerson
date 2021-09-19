@@ -100,6 +100,15 @@ class RandomPerson():
     return self.firstname_value + " " + self.lastname_value
 
 
+  def mail_specific_format(self, ending, connector):
+    fname = self.firstname_value
+    lname = self.lastname_value
+
+    mail = fname + connector + lname + ending
+
+    return mail 
+
+
   def mail(self):
     fname = self.firstname_value
     lname = self.lastname_value
@@ -210,6 +219,3 @@ def generate_phonenumber(N):
 	min = pow(10, N-1)
 	max = pow(10, N) - 1
 	return random.randint(min, max)
-
-
-
